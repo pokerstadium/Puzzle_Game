@@ -20,7 +20,7 @@ public class TileManager : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    //引数２のStageManagerを変数stageManagerに入れる
+    //引数３のStageManagerを変数stageManagerに入れる
     public void SetInit(TileType tileType, Vector2Int position, StageManager stageManager)
     {
         intPosition = position;

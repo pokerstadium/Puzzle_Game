@@ -2,21 +2,18 @@
 
 public class StageManager : MonoBehaviour
 {
-    public TextAsset stageFile;
+    public TextAsset[] stageFiles; // 複数のステージをセット
     private TileType[,] tileTable;
     public TileManager tilePrefab;
     private TileManager[,] tilesPrefab;
+    public GameManager gameManager;
 
-    // Start is called before the first frame update
-    private void Start()
-    {
-        LoadStageFromText();
-        DebugTable();
-        CreateStage();
-    }
+    // GameManagerから関数を与えられる
+    public delegate void StageClear();
+    public StageClear stageClear;
 
     // パネルの設置調整
-    private void CreateStage()
+    public void CreateStage()
     {
         // 真ん中に配置するための調整
         Vector2 halfSize;
@@ -38,6 +35,7 @@ public class StageManager : MonoBehaviour
                 tile.SetInit(tileTable[x, y], position, this);
 
                 // 逆向きで配置しているので修正
+                // textデータの読み込みは左上からだが、表示するときは左下から表示するになるので‐1をかけて反転させている
                 setPosition.y *= -1;
 
                 // タイルの位置を指定したX,Yポジションに設置する
@@ -48,11 +46,12 @@ public class StageManager : MonoBehaviour
         }
     }
 
-    private void LoadStageFromText()
+    // ステージテキスト読み込み
+    public void LoadStageFromText(int loadstage)
     {
         // 空白を区切って改行
         //  System.StringSplitOptions.RemoveEmptyEntriesは空白を削除する意味でとりあえず入れておけばOK
-        string[] lines = stageFile.text.Split(new[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
+        string[] lines = stageFiles[loadstage].text.Split(new[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
         int columns = 5;
         int rows = 5;
         tileTable = new TileType[columns, rows]; // 列挙型の情報が入っている
@@ -74,17 +73,18 @@ public class StageManager : MonoBehaviour
         }
     }
 
+    // クリア判定
     public void ClickedTile(Vector2Int center)
     {
         ReverseTiles(center);
         if (IsClear())
         {
             Debug.Log("Clear");
-            ResetStage();
+            stageClear();
         }
     }
 
-    // 中心位置を渡される（タイルをクリックしたら）
+    // タイルをクリックしたら
     private void ReverseTiles(Vector2Int center)
     {
         // 上下左右を入れる
@@ -113,6 +113,7 @@ public class StageManager : MonoBehaviour
         }
     }
 
+    // クリア判定
     private bool IsClear()
     {
         for (int y = 0; y < tilesPrefab.GetLength(1); y++)
@@ -128,7 +129,8 @@ public class StageManager : MonoBehaviour
         return true;
     }
 
-    private void ResetStage()
+    // パネルの削除
+    public void DestroyStage()
     {
         for (int y = 0; y < tilesPrefab.GetLength(1); y++)
         {
@@ -137,7 +139,6 @@ public class StageManager : MonoBehaviour
                 Destroy(tilesPrefab[x, y].gameObject);
             }
         }
-        CreateStage();
     }
 
     //デバッグ用
