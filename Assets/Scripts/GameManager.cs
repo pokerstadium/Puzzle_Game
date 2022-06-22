@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
 
     public StageManager stageManager;
     int currentStage;
+    public GameObject clearPanel;
 
     // ステージテキストとパネルの設置
     private void Start()
@@ -28,10 +30,24 @@ public class GameManager : MonoBehaviour
     // クリア処理
     public void Cleard()
     {
+        StartCoroutine(ClearStage());
+    }
+
+    IEnumerator ClearStage()
+    {
+        clearPanel.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
         currentStage++;
+
+        // 最終ステージかどうか
+        if (currentStage >= stageManager.stageFiles.Length)
+        {
+            SceneManager.LoadScene("Clear");
+            yield return null;
+        }
         stageManager.DestroyStage();
         stageManager.LoadStageFromText(currentStage);
         stageManager.CreateStage();
+        clearPanel.SetActive(false);
     }
-
 }

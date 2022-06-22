@@ -8,7 +8,7 @@ public class StageManager : MonoBehaviour
     private TileManager[,] tilesPrefab;
     public GameManager gameManager;
 
-    // GameManagerから関数を与えられる
+    // GameManagerからクリアしたときの関数を与えられる
     public delegate void StageClear();
     public StageClear stageClear;
 
@@ -31,8 +31,10 @@ public class StageManager : MonoBehaviour
                 Vector2Int position = new Vector2Int(x, y);
                 Vector2 setPosition = (Vector2)position * tileSize - halfSize;
 
-                // 引数１はDEATHかALIVEか、引数２はインスタンス化したVector2Int、引数３はこのStageMamagerを入れる
-                tile.SetInit(tileTable[x, y], position, this);
+                // 引数１はDEATHかALIVEか、引数２はインスタンス化したVector2Intを入れる
+                tile.SetInit(tileTable[x, y], position);
+
+                tile.clicked += ClickedTile;
 
                 // 逆向きで配置しているので修正
                 // textデータの読み込みは左上からだが、表示するときは左下から表示するになるので‐1をかけて反転させている

@@ -12,19 +12,20 @@ public class TileManager : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     public Sprite deathSprite;
     public Sprite aliveSprite;
-    private StageManager stageManager;
     private Vector2Int intPosition;
+
+    // StageManagerからタイルをクリックされた時の関数を渡される
+    public delegate void Clicked(Vector2Int center); // ClickedTile関数の型
+    public Clicked clicked;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    //引数３のStageManagerを変数stageManagerに入れる
-    public void SetInit(TileType tileType, Vector2Int position, StageManager stageManager)
+    public void SetInit(TileType tileType, Vector2Int position)
     {
         intPosition = position;
-        this.stageManager = stageManager;
         SetType(tileType);
     }
 
@@ -49,7 +50,7 @@ public class TileManager : MonoBehaviour
     public void OnTile()
     {
         ReverseTile();
-        stageManager.ClickedTile(intPosition);
+        clicked(intPosition);
     }
 
     public void ReverseTile()
