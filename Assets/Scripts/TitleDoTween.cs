@@ -21,7 +21,12 @@ public class TitleDoTween : MonoBehaviour
 
     public void Fruit1()
     {
+        // Tweenを繋げて1つのアニメーションとして連続実行させる
         var seq = DOTween.Sequence();
+
+        // Domoveで1秒かけて移動する
+        // SetEaseで始点と終点の動きを設定する
+        // SetRelativeで現在地点から相対値を使う
 
         seq.Append(transform.DOMoveY(-0.5f, 1f).SetEase(Ease.OutSine)).SetRelative();
 
