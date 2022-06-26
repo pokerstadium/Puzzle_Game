@@ -10,7 +10,7 @@ public class SelectStageManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        stageNum = PlayerPrefs.GetInt("SCORE", 0); // 現在のstageNumを呼び出す
+        //stageNum = PlayerPrefs.GetInt("SCORE", 0); // 現在のstageNumを呼び出す
     }
 
     // Update is called once per frame
