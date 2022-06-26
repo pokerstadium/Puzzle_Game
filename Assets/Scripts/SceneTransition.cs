@@ -5,8 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransition : MonoBehaviour
 {
-   　public void OnPanel(string loadScene)
+   　public void OnNextStage(string loadScene)
     {
+        //PlayerPrefs.SetInt("SCORE", 0);
+        ////PlayerPrefsをセーブする
+        //PlayerPrefs.Save();
         SceneManager.LoadScene(loadScene);
     }
 

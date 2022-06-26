@@ -688,7 +688,6 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 0f8b464ab453e224ab861eb9fc10d849, type: 3}
   - {fileID: 4900000, guid: 8c204417662ca7845ad9bc3c037623af, type: 3}
   - {fileID: 4900000, guid: b100ad031320c0e47b9051940598244f, type: 3}
-  - {fileID: 4900000, guid: f3a7f2f799dbba44d938eb0226855d23, type: 3}
   tilePrefab: {fileID: 6456021176331794256, guid: cd28ede105d23a149a39fad5d20bbb4d, type: 3}
   gameManager: {fileID: 1206929444}
 --- !u!4 &359261021
@@ -1149,7 +1148,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -238, y: 493}
+  m_AnchoredPosition: {x: -238, y: 13}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1197348988
@@ -1416,8 +1415,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 556.38}
+  m_SizeDelta: {x: 0, y: -1112.75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1733173933
 MonoBehaviour:
@@ -1491,7 +1490,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -157.99998, y: 492.99997}
+  m_AnchoredPosition: {x: -157.99998, y: 12.99995}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1805182931
@@ -1634,7 +1633,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1824820699}
         m_TargetAssemblyTypeName: SceneTransition, Assembly-CSharp
-        m_MethodName: OnPanel
+        m_MethodName: OnNextStage
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1699,7 +1698,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2019978127
 RectTransform:
   m_ObjectHideFlags: 0

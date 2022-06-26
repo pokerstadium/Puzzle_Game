@@ -5,6 +5,8 @@ public class TitleManager : MonoBehaviour
     [SerializeField] private GameObject descriptionPage1;
     [SerializeField] private GameObject descriptionPage2;
     [SerializeField] private GameObject descriptionPage3;
+    [SerializeField] private GameObject stageSelect;
+    [SerializeField] private GameObject popup;
 
     public void OnDescriptionPage1()
     {
@@ -26,6 +28,22 @@ public class TitleManager : MonoBehaviour
     {
         descriptionPage1.SetActive(false);
         descriptionPage2.SetActive(false);
+        stageSelect.SetActive(false);
+    }
+
+    public void OnStageSelect()
+    {
+        stageSelect.SetActive(true);
+    }
+
+    public void OnPophp()
+    {
+        popup.SetActive(true);
+    }
+
+    public void DeletePophp()
+    {
+        popup.SetActive(false);
     }
 
     // Start is called before the first frame update

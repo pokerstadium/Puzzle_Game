@@ -10,6 +10,7 @@ public class StageManager : MonoBehaviour
 
     // GameManagerからクリアしたときの関数を与えられる
     public delegate void StageClear();
+
     public StageClear stageClear;
 
     // パネルの設置調整
@@ -17,9 +18,19 @@ public class StageManager : MonoBehaviour
     {
         // 真ん中に配置するための調整
         Vector2 halfSize;
-        float tileSize = tilePrefab.GetComponent<SpriteRenderer>().bounds.size.x; // この時のbounds.sizeは1.28。BoxCollierのサイズから引っ張っている
-        halfSize.x = tileSize * (tileTable.GetLength(0) / 2); // 1.28 * 2 = 2.56。四捨五入で2.6となる
-        halfSize.y = tileSize * (tileTable.GetLength(1) / 2);
+        float tileSize = tilePrefab.GetComponent<SpriteRenderer>().bounds.size.x; // Collider2Dのサイズを参考にしているが、スプライト自体の大きさに合わせているのでそれぞれの値が違う
+
+        // テキストの長さが奇数・偶数に応じてパネルを真ん中に配置するようにする
+        if (tileTable.GetLength(0) % 2 == 0 && tileTable.GetLength(1) % 2 == 0)
+        {
+            halfSize.x = tileSize * (tileTable.GetLength(0) / 2.7f);
+            halfSize.y = tileSize * (tileTable.GetLength(1) / 2.7f);
+        }
+        else
+        {
+            halfSize.x = tileSize * (tileTable.GetLength(0) / 2); // Collider2Dのサイズ * 2 = halffSize。四捨五入される
+            halfSize.y = tileSize * (tileTable.GetLength(1) / 2);
+        }
 
         for (int y = 0; y < tileTable.GetLength(1); y++)
         {
@@ -29,6 +40,7 @@ public class StageManager : MonoBehaviour
 
                 // X.Yのポジションに指定する場所を設定
                 Vector2Int position = new Vector2Int(x, y);
+
                 Vector2 setPosition = (Vector2)position * tileSize - halfSize;
 
                 // 引数１はDEATHかALIVEか、引数２はインスタンス化したVector2Intを入れる
@@ -54,8 +66,8 @@ public class StageManager : MonoBehaviour
         // 空白を区切って改行
         //  System.StringSplitOptions.RemoveEmptyEntriesは空白を削除する意味でとりあえず入れておけばOK
         string[] lines = stageFiles[loadstage].text.Split(new[] { '\n', '\r' }, System.StringSplitOptions.RemoveEmptyEntries);
-        int columns = 5;
-        int rows = 5;
+        int columns = lines.Length;
+        int rows = lines.Length;
         tileTable = new TileType[columns, rows]; // 列挙型の情報が入っている
         tilesPrefab = new TileManager[columns, rows]; // 画面に配置しているタイルの情報が入っている
         for (int y = 0; y < rows; y++)

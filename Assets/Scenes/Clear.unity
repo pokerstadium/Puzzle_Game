@@ -209,7 +209,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 57937058}
         m_TargetAssemblyTypeName: SceneTransition, Assembly-CSharp
-        m_MethodName: OnPanel
+        m_MethodName: OnNextStage
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
