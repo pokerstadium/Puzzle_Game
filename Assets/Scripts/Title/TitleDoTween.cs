@@ -5,9 +5,12 @@ using System.Collections;
 
 public class TitleDoTween : MonoBehaviour
 {
+    public AudioClip audioClip;
+    AudioSource audioSource;
     // Start is called before the first frame update
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
 
         if(gameObject.tag == "Fruit1")
         {
@@ -18,6 +21,7 @@ public class TitleDoTween : MonoBehaviour
             Fruit2();
         }
     }
+
 
     public void Fruit1()
     {
@@ -60,6 +64,7 @@ public class TitleDoTween : MonoBehaviour
     IEnumerator OnClickFruit()
     {
         Debug.Log("クリック検知");
+        audioSource.PlayOneShot(audioClip);
         transform.DOScale(new Vector3(3, 3, 3), 1f);
         yield return new WaitForSeconds(1f);
         transform.DOScale(new Vector3(1.5f, 1.5f, 1), 1f);

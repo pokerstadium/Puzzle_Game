@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
 
     public StageManager stageManager;
-    int currentStage;
+    int currentStage = 0;
     public GameObject clearPanel;
 
     // ステージテキストとパネルの設置
