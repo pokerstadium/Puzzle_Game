@@ -5,8 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class SceneTransition : MonoBehaviour
 {
-   　public void OnNextStage(string loadScene)
+    public AudioClip audioClip;
+    AudioSource audioSource;
+
+    private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+    }
+    public void OnNextStage(string loadScene)
+    {
+        audioSource.PlayOneShot(audioClip);
         SceneManager.LoadScene(loadScene);
     }
 

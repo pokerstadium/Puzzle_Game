@@ -16,6 +16,7 @@ public class TileManager : MonoBehaviour
 
     // StageManagerからタイルをクリックされた時の関数を渡される
     public delegate void Clicked(Vector2Int center); // ClickedTile関数の型
+
     public Clicked clicked;
 
     private void Awake()

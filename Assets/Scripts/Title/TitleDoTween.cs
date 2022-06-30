@@ -65,9 +65,9 @@ public class TitleDoTween : MonoBehaviour
     {
         Debug.Log("クリック検知");
         audioSource.PlayOneShot(audioClip);
-        transform.DOScale(new Vector3(3, 3, 3), 1f);
+        transform.DOScale(new Vector3(4.5f, 4.5f, 4.5f), 1f);
         yield return new WaitForSeconds(1f);
-        transform.DOScale(new Vector3(1.5f, 1.5f, 1), 1f);
+        transform.DOScale(new Vector3(3, 3, 1), 1f);
     }
 
 

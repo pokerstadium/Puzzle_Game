@@ -7,15 +7,22 @@ public class StageManager : MonoBehaviour
     public TileManager tilePrefab;
     private TileManager[,] tilesPrefab;
     public GameManager gameManager;
+    public AudioClip audioClip;
+    AudioSource audioSource;
 
     // GameManagerからクリアしたときの関数を与えられる
     public delegate void StageClear();
-
     public StageClear stageClear;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     // パネルの設置調整
     public void CreateStage()
     {
+        audioSource.enabled = true;
         // 真ん中に配置するための調整
         Vector2 halfSize;
         float tileSize = tilePrefab.GetComponent<SpriteRenderer>().bounds.size.x; // Collider2Dのサイズを参考にしているが、スプライト自体の大きさに合わせているのでそれぞれの値が違う
@@ -93,6 +100,7 @@ public class StageManager : MonoBehaviour
         ReverseTiles(center);
         if (IsClear())
         {
+            audioSource.enabled = false;
             Debug.Log("Clear");
             stageClear();
         }
@@ -101,6 +109,7 @@ public class StageManager : MonoBehaviour
     // タイルをクリックしたら
     private void ReverseTiles(Vector2Int center)
     {
+        audioSource.PlayOneShot(audioClip);
         // 上下左右を入れる
         Vector2Int[] around =
         {
